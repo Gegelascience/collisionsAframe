@@ -149,5 +149,9 @@ AFRAME.registerComponent('car', {
         this.el.appendChild(roues[index]);
         
       }
+    },
+  
+    tick: function (time, timeDelta) {
+      // Do something on every scene tick or frame.
     }
 });

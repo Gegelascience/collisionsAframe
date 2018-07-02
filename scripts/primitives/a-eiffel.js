@@ -27,33 +27,25 @@ AFRAME.registerComponent('eiffel', {
       var socles=[];
       for (let index = 0; index < 4; index++) {
         var socle=document.createElement('a-box');
-        socle.setAttribute('position', {
-          x: -15,
-          y: -1.5,
-          z: 15
-        });
+        var pos=socle.getAttribute('position');
+        pos.y=-1.5;
+        if (index%2===0) {
+          pos.x=-15;
+        } else {
+          pos.x=15;
+        }
+        if (index>1) {
+          pos.z=-15;
+        } else {
+          pos.z=15;
+        }
+        socle.setAttribute('position',pos);
         socle.setAttribute('material', 'color', colorSocle);
         socle.setAttribute('geometry', 'depth', 12);
         socle.setAttribute('geometry', 'width', 12);
         socle.setAttribute('geometry', 'height', 2);
         socles.push(socle);
       }
-      socles[1].setAttribute('position', {
-        x: 15,
-        y: -1.5,
-        z: 15
-      });
-      socles[2].setAttribute('position', {
-        x: -15,
-        y: -1.5,
-        z: -15
-      });
-      socles[3].setAttribute('position', {
-        x: 15,
-        y: -1.5,
-        z: -15
-      });
-
       for (let index = 0; index < socles.length; index++) {
         this.el.appendChild(socles[index]); 
       }
@@ -108,44 +100,32 @@ AFRAME.registerComponent('eiffel', {
       this.el.appendChild(station);
 
       //arche niveau 1
-      var archn1p1=document.createElement('a-archn1');
-      archn1p1.setAttribute('rotx', -11.3);
-      archn1p1.setAttribute('position', {
-        x: -18,
-        y: 0,
-        z: 18
-      });
-      this.el.appendChild(archn1p1);
-
-      var archn1p2=document.createElement('a-archn1');
-      archn1p2.setAttribute('rotx', -11.3);
-      archn1p2.setAttribute('roty', 90);
-      archn1p2.setAttribute('position', {
-        x: 18,
-        y: 0,
-        z: 18
-      });
-      this.el.appendChild(archn1p2);
-
-      var archn1p3=document.createElement('a-archn1');
-      archn1p3.setAttribute('rotx', -11.3);
-      archn1p3.setAttribute('roty', -90);
-      archn1p3.setAttribute('position', {
-        x: -18,
-        y: 0,
-        z: -18
-      });
-      this.el.appendChild(archn1p3);
-
-      var archn1p4=document.createElement('a-archn1');
-      archn1p4.setAttribute('rotx', -11.3);
-      archn1p4.setAttribute('roty', 180);
-      archn1p4.setAttribute('position', {
-        x: 18,
-        y: 0,
-        z: -18
-      });
-      this.el.appendChild(archn1p4);
+      var archn1s=[];
+      for (let index = 0; index < 4; index++) {
+        var arche=document.createElement('a-archn1');
+        arche.setAttribute('rotx', -11.3);
+        var roty=index*90;
+        arche.setAttribute('roty', roty);
+        var pos=arche.getAttribute('position');
+        pos.y=0;
+        if (index%2===0) {
+          pos.x=-18;
+        } else {
+          pos.x=18;
+        }
+        if (index>1) {
+          pos.z=-18;
+        } else {
+          pos.z=18;
+        }
+        arche.setAttribute('position',pos);
+        archn1s.push(arche);
+      }
+      archn1s[2].setAttribute('roty', -90);
+      archn1s[3].setAttribute('roty', 180);
+      for (let index = 0; index < socles.length; index++) {
+        this.el.appendChild(archn1s[index]); 
+      }
 
       //arche niveau 2 et 3
       var archn2p1=document.createElement('a-archn2');
@@ -213,7 +193,6 @@ AFRAME.registerPrimitive('a-archn1', {
     defaultComponents: {
       archn1:{},
       
-      
     },
   
     // Maps HTML attributes to the `archn1` component's properties.
@@ -277,10 +256,7 @@ AFRAME.registerComponent('archn1', {
         // Do something the component or its entity is detached.
         this.el.removeObject3D('mesh');
       },
-    
-      tick: function (time, timeDelta) {
-        // Do something on every scene tick or frame.
-      }
+
     });
 
     
@@ -293,15 +269,13 @@ AFRAME.registerPrimitive('a-archn2', {
       defaultComponents: {
         archn2:{},
         
-        
       },
     
       // Maps HTML attributes to the `archn2` component's properties.
       mappings: {}
     });
 AFRAME.registerComponent('archn2', {
-        schema: {
-            
+        schema: { 
             color: {type: 'color', default: colorArche}
         },
       
@@ -333,16 +307,9 @@ AFRAME.registerComponent('archn2', {
           el.setObject3D(this.attrName, this.mesh);
         },
       
-        update: function () {
-          // Do something when component's data is updated.
-        },
-      
         remove: function () {
           // Do something the component or its entity is detached.
           this.el.removeObject3D('mesh');
         },
       
-        tick: function (time, timeDelta) {
-          // Do something on every scene tick or frame.
-        }
       });
