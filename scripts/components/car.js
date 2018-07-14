@@ -6,15 +6,29 @@ AFRAME.registerComponent('car', {
    
     schema: {
       teinte: {type: 'string', default:'red'},
+      sens:{type:'boolean',default:false}
     },
 
     init: function () {
-    
+      var rotY=0
+      var corpSens=0;
+      var fenetreSens=0;
+      var triangleSens=[0,0]
+      var triangleSens2=triangleSens
+      var avantSens=triangleSens
+      if (this.data.sens) {
+        rotY=180
+        corpSens=0.5
+        fenetreSens=3.5
+        triangleSens=[0.5,2]
+        triangleSens2=[6.5,2]
+        avantSens=[6.5,2]
+      }
     //fenetres
       var teintefenetre='black'; 
       var fenetre=document.createElement('a-box');
       fenetre.setAttribute('position', {
-        x: -1,
+        x: -1+fenetreSens,
         y: 2,
         z: 0
       });
@@ -38,13 +52,13 @@ AFRAME.registerComponent('car', {
       var mesh = new THREE.Mesh(geometry, material);
       triangle.setObject3D(this.attrName,mesh);
       triangle.setAttribute('position', {
-        x: 0.5,
+        x: 0.5+triangleSens[0],
         y: 1.5,
-        z: 1
+        z: 1-triangleSens[1]
       });
       triangle.setAttribute('rotation', {
         x: 180,
-        y: 0,
+        y: rotY,
         z: -90
       });
       this.el.appendChild(triangle);
@@ -62,13 +76,13 @@ AFRAME.registerComponent('car', {
       var mesh = new THREE.Mesh(geometry, material);
       triangle2.setObject3D(this.attrName,mesh);
       triangle2.setAttribute('position', {
-        x: -2.5,
+        x: -2.5+triangleSens2[0],
         y: 1.5,
-        z: -1
+        z: -1+triangleSens2[1]
       });
       triangle2.setAttribute('rotation', {
         x: 180,
-        y: 180,
+        y: 180+rotY,
         z: -90
       });
       this.el.appendChild(triangle2);
@@ -77,7 +91,7 @@ AFRAME.registerComponent('car', {
     //corps
       var corps=document.createElement('a-box');
       corps.setAttribute('position', {
-        x: 0.5,
+        x: 0.5+corpSens,
         y: 1,
         z: 0
       });
@@ -102,13 +116,13 @@ AFRAME.registerComponent('car', {
       var mesh = new THREE.Mesh(geometry, material);
       avant.setObject3D(this.attrName,mesh);
       avant.setAttribute('position', {
-        x: 4,
+        x: 4-avantSens[0],
         y: 0.5,
-        z: 1
+        z: 1-avantSens[1]
       });
       avant.setAttribute('rotation', {
         x: 180,
-        y: 0,
+        y: 0+rotY,
         z: -90
       });
       this.el.appendChild(avant);
@@ -149,6 +163,7 @@ AFRAME.registerComponent('car', {
         this.el.appendChild(roues[index]);
         
       }
+      
     },
   
     tick: function (time, timeDelta) {

@@ -2,15 +2,18 @@
   <head>
     <meta charset="utf-8">
     <title>Champs de Mars</title>
-    <script src="./scripts/aframe.min.js" ></script>
+    <script src="./scripts/libs/aframe.min.js" ></script>
+    <script src="./scripts/libs/aframe-physics-system.min.js"></script>
+    <script src="./scripts/libs/aframe-physics-extras.min.js"></script>
     <script src="./scripts/primitives/a-eiffel.js"></script>
     <script src="./scripts/components/tree.js"></script>
     <script src="./scripts/components/greenarea.js"></script>
     <script src="./scripts/components/car.js"></script>
+    <script src="./scripts/components/cam_move.js"></script>
     
   </head>
   <body>
-    <a-scene stats background="color:#F0FFFF">
+    <a-scene stats background="color:#F0FFFF" physics="debug: false; gravity: -9.81">
         
       <a-assets>
         <a-audio id="sontest" src="./assets/trumpet.mp3"></a-audio>
@@ -18,20 +21,21 @@
         
 
        <!-- Camera -->
-        <a-camera position="0 3 50" >
-          <a-animation attribute="position" dur="10500" easing="linear" fill="forward" from="0 350 50" to="0 3 50" repeat="0"></a-animation>
-        </a-camera>
+       <a-entity id="cam"  camera look-controls position="0 0.5 50">
+         <a-box id="cambody" camcol dynamic-body  visible="false"></a-box>
+       </a-entity>
+        
 
       
       <!--Tour eiffel-->
       <a-eiffel position="0 3.5 -47.5"  scale="2.3 2.3 2.3" ></a-eiffel>
      
       <!--trottoir tour eiffel-->
-      <a-plane  color="#9793a1" height="125" width="123" position="0 0 -47.5" rotation="-90 0 0"></a-plane>
+      <a-plane  color="#9793a1" height="125" width="123" position="0 0 -47.5" rotation="-90 0 0" static-body ></a-plane>
 
       
       <!--route-->
-      <a-plane  color="#808080" width="123" height="8" position="0 0 19" rotation="-90 0 0"></a-plane>
+      <a-plane  color="#808080" width="123" height="8" position="0 0 19" rotation="-90 0 0" static-body></a-plane>
       
       <!--passages pieton-->
       <a-plane color="white" width="10" height="1" position="20 0.03 17" rotation="-90 0 0" ></a-plane>
@@ -43,22 +47,22 @@
       <a-plane color="white" width="10" height="1" position="-20 0.03 21" rotation="-90 0 0" ></a-plane>
 
       <!--voitures-->
-      <a-entity car position="0 0 17" >
+      <a-entity id="redCar" car position="0 0 17" static-body physics-collider="ignoreSleep:false" >
         <a-animation attribute="position" dur="10500" easing="linear" fill="forward" from="-61.5 0 17" to="61.5 0 17" repeat="indefinite "></a-animation>
       </a-entity>
 
-      <a-entity car="teinte:yellow" position="0 0 21" rotation="0 180 0" >
+      <a-entity id="yellowCar" car="teinte:yellow;sens:true" position="0 0 21"  static-body physics-collider>
         <a-animation attribute="position" dur="20000" easing="linear" fill="forward" from="61.5 0 21" to="-61.5 0 21" repeat="indefinite "></a-animation>
       </a-entity>
       
       
 
       <!--trottoir champs de mars-->
-      <a-plane  color="#9793a1" width="123" height="2" position="0 0 24" rotation="-90 0 0"></a-plane>        
+      <a-plane  color="#9793a1" width="123" height="2" position="0 0 24" rotation="-90 0 0" static-body ></a-plane>        
       
       <!--zones vertes champs de mars-->
-      <a-entity greenarea  position="0 0 50"></a-entity>
-      <a-entity greenarea  position="0 0 110"></a-entity>
+      <a-entity greenarea  position="0 0 50" static-body ></a-entity>
+      <a-entity greenarea  position="0 0 110" static-body ></a-entity>
 
       <!--arbustes-->
       <a-cone color="green" radius-top="0" radius-bottom="1" height="2.5" position="-13 1 50" ></a-cone>
@@ -101,5 +105,7 @@
       <a-sound src="#sontest" autoplay="true" volume="100" ></a-sound>
         
     </a-scene>
+
+    <script src="scripts/userCollision.js"></script>
   </body>
 </html>
