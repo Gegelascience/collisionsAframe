@@ -2,4 +2,4 @@
 
 #Présentation
 
-Ce projet est développé avec la library "aframe".
+Ce projet est développé avec la library "aframe". On déplace la caméra grâce aux touches directionnelles
