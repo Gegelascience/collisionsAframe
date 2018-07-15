@@ -19,13 +19,17 @@
         <a-audio id="sontest" src="./assets/trumpet.mp3"></a-audio>
       </a-assets>
         
+      <!--Info sur les collisions-->
+      <a-text id="info" value="" align="center" color="#000000" position="0 0.5 48" ></a-text>
+
+       <!--son animation-->
+       <a-sound src="#sontest" autoplay="true" volume="100" ></a-sound>
 
        <!-- Camera -->
        <a-entity id="cam"  camera look-controls position="0 0.5 50">
          <a-box id="cambody" camcol dynamic-body  visible="false"></a-box>
        </a-entity>
         
-
       
       <!--Tour eiffel-->
       <a-eiffel position="0 3.5 -47.5"  scale="2.3 2.3 2.3" ></a-eiffel>
@@ -35,7 +39,7 @@
 
       
       <!--route-->
-      <a-plane  color="#808080" width="123" height="8" position="0 0 19" rotation="-90 0 0" static-body></a-plane>
+      <a-plane id='road'  color="#808080" width="123" height="8" position="0 0 19" rotation="-90 0 0" static-body></a-plane>
       
       <!--passages pieton-->
       <a-plane color="white" width="10" height="1" position="20 0.03 17" rotation="-90 0 0" ></a-plane>
@@ -100,9 +104,6 @@
       <a-entity treecarre  position="27 0 126" scale="1.25 1.25 1.25"></a-entity>
       <a-entity treecarre  position="27 0 138" scale="1.25 1.25 1.25"></a-entity>
 
-      
-      <!--son animation-->
-      <a-sound src="#sontest" autoplay="true" volume="100" ></a-sound>
         
     </a-scene>
 

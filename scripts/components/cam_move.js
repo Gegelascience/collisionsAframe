@@ -5,7 +5,8 @@ AFRAME.registerComponent('camcol', {
             var cam=document.getElementById("cam")
             var el=document.getElementById("cambody")
             var pos=cam.getAttribute("position")
-
+            
+            
             if (pos.y<0.5) {
                 cam.setAttribute("position",'y',0.5)
             }
@@ -27,6 +28,9 @@ AFRAME.registerComponent('camcol', {
                 pos.x+=1
                 cam.setAttribute("position",pos)
                 el.body.position.set(pos.x,pos.y,pos.z)
+            }else if (e.keyCode===9) {
+                var text=document.getElementById("info")
+                text.setAttribute("value","")
             }
 
             
