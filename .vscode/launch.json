@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Lancer le programme",
-            "program": "${workspaceRoot}/scripts/web-server.js"
+            "program": "${workspaceRoot}/server.js"
         }
     ]
 }

@@ -1,0 +1,8 @@
+{
+   "name": "champsdemars",
+   "description": "Champs de Mars en 3D",
+   "version": "0.0.1",
+   "dependencies": {
+      "express": "4.x"
+   }
+}
