@@ -2,6 +2,7 @@ AFRAME.registerComponent('camcol', {
     init:function(){
         
         document.addEventListener("keypress",function(e) {
+            //init
             var cam=document.getElementById("cam")
             var el=document.getElementById("cambody")
             var pos=cam.getAttribute("position")
