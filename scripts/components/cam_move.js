@@ -1,6 +1,5 @@
 AFRAME.registerComponent('camcol', {
     init:function(){
-        
         document.addEventListener("keypress",function(e) {
             //récupération des balises html
             var cam=document.getElementById("cam");
@@ -12,30 +11,30 @@ AFRAME.registerComponent('camcol', {
                 cam.setAttribute("position",'y',0.5);
             }
             //déplacement de la camera
-            if (e.keyCode===38) {//up
+            if (e.key==='z') {//up
                 pos.z-=1*Math.cos(camOrientation);
                 pos.x-=1*Math.sin(camOrientation);
                 cam.setAttribute("position",pos);
                 el.body.position.set(pos.x,pos.y,pos.z);
 
-            }else if(e.keyCode===40){//down
+            }else if(e.key==='s'){//down
                 pos.z+=1*Math.cos(camOrientation);
                 pos.x+=1*Math.sin(camOrientation);
                 cam.setAttribute("position",pos);
                 el.body.position.set(pos.x,pos.y,pos.z);
-            }else if(e.keyCode===37){//left
+            }else if(e.key==='a'){//left
                 pos.z-=1*Math.cos(camOrientation+Math.PI/2);
                 pos.x-=1*Math.sin(camOrientation+Math.PI/2);
                 cam.setAttribute("position",pos);
                 el.body.position.set(pos.x,pos.y,pos.z);
             }
-            else if(e.keyCode===39){//right
+            else if(e.key==='e'){//right
                 pos.z+=1*Math.cos(camOrientation+Math.PI/2);
                 pos.x+=1*Math.sin(camOrientation+Math.PI/2);
                 cam.setAttribute("position",pos);
                 el.body.position.set(pos.x,pos.y,pos.z);
             //effacer le texte
-            }else if (e.keyCode===9) {//tab
+            }else if (e.key==='d') {//tab
                 var text=document.getElementById("info");
                 text.setAttribute("value","");
             }
