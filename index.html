@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Champs de Mars</title>
-  <script src="./scripts/libs/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="./scripts/libs/aframe-physics-system.min.js"></script>
   <script src="./scripts/libs/aframe-physics-extras.min.js"></script>
   <script src="./scripts/primitives/a-eiffel.js"></script>
@@ -58,14 +58,12 @@
       <a-plane color="white" width="10" height="1" position="-20 0.03 21" rotation="-90 0 0"></a-plane>
 
       <!--voitures-->
-      <a-entity id="redCar" car position="0 0 17" static-body physics-collider="ignoreSleep:false">
-        <a-animation attribute="position" dur="10500" easing="linear" fill="forward" from="-61.5 0 17" to="61.5 0 17"
-          repeat="indefinite "></a-animation>
+      <a-entity id="redCar" animation='property:position;from:-61.5 0 17;to:61.5 0 17;dur:20000;easing:linear;loop:true'
+        car position="0 0 17" static-body physics-collider="ignoreSleep:false">
       </a-entity>
 
-      <a-entity id="yellowCar" car="teinte:yellow;sens:true" position="0 0 21" static-body physics-collider>
-        <a-animation attribute="position" dur="20000" easing="linear" fill="forward" from="61.5 0 21" to="-61.5 0 21"
-          repeat="indefinite "></a-animation>
+      <a-entity animation='property:position;from:61.5 0 21;to:-61.5 0 21;dur:20000;easing:linear;loop:true'
+        id="yellowCar" car="teinte:yellow;sens:true" position="0 0 21" static-body physics-collider>
       </a-entity>
 
       <!--trottoir champs de mars-->
